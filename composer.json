@@ -1,0 +1,37 @@
+{
+    "name": "ecommercegeeks/myparcel-sdk",
+    "description": "MyParcel SDK",
+    "type": "library",
+    "license": "GNU LGPLv3",
+    "autoload": {
+        "psr-4": {
+            "EcommerceGeeks\\MyparcelSdk\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EcommerceGeeks\\MyparcelSdk\\Tests\\": "tests"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "eCommerce Geeks"
+        }
+    ],
+    "require": {
+        "saloonphp/saloon": "^3.0"
+    },
+    "require-dev": {
+        "ext-fileinfo": "*",
+        "pestphp/pest": "^3.5",
+        "symfony/dotenv": "^7.2",
+        "symfony/var-dumper": "^7.2",
+        "fakerphp/faker": "^1.24"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
