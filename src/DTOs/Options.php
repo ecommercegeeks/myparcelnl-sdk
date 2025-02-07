@@ -1,6 +1,7 @@
 <?php
 namespace EcommerceGeeks\MyparcelSdk\DTOs;
 use EcommerceGeeks\MyparcelSdk\Contracts\Arrayable;
+use EcommerceGeeks\MyparcelSdk\Enums\DeliveryType;
 use EcommerceGeeks\MyparcelSdk\Enums\PackageType;
 use EcommerceGeeks\MyparcelSdk\Traits\AttributesToArray;
 
@@ -16,7 +17,8 @@ class Options implements Arrayable
         public ?bool $return = null,
         public ?bool $large_format = null,
         public ?string $label_description = null,
-        public ?bool $age_check = null
+        public ?bool $age_check = null,
+        public ?DeliveryType $delivery_type = null,
     )
     {
     }

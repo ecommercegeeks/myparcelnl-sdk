@@ -5,6 +5,9 @@ namespace EcommerceGeeks\MyparcelSdk\Tests\Factories;
 use EcommerceGeeks\MyparcelSdk\DTOs\Options;
 use EcommerceGeeks\MyparcelSdk\Enums\PackageType;
 
+/**
+ * @implements Factory<Options>
+ */
 class OptionsFactory extends Factory
 {
     protected string $instanceClass = Options::class;
