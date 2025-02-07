@@ -5,6 +5,9 @@ namespace EcommerceGeeks\MyparcelSdk\Tests\Factories;
 use EcommerceGeeks\MyparcelSdk\DTOs\Shipment;
 use EcommerceGeeks\MyparcelSdk\Enums\Carrier;
 
+/**
+ * @implements Factory<Shipment>
+ */
 class ShipmentFactory extends Factory
 {
     protected string $instanceClass = Shipment::class;

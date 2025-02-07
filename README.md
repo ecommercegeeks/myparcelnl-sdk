@@ -1,10 +1,10 @@
-# A saloon based PHP SDK for MyParcel
+# A Saloon based PHP SDK for MyParcel
 
 The official SDK for MyParcel contains many smart features that in practice get in the way more than help. So we
 developed this dumb SDK.
 
-This SDK stays close to the [API documentation](https://developer.myparcel.nl/api-reference/). DTOs and Enums are used
-where it makes sense.
+This SDK stays close to the [API documentation](https://developer.myparcel.nl/api-reference/). DTOs and Enums are used where it makes sense. This SDK is light
+on documentation, because autocomplete will show you the way.
 
 ## Usage
 
@@ -14,12 +14,32 @@ Installation
 composer require ecommercegeeks/myparcel-sdk
 ```
 
+### Creating a label
+
 ```php
-/**
- * Creating a connector doesn't make a network request yet, so can be initialized safely at application init.
- */
+// Creating a connector doesn't make a network request yet, so can be initialized safely at application init.
 $connector = new Connector($apiKey);
+
+// Fill the DTOs
+$shipment = new Shipment(recipient: new Recipient(...), ...);
+
+// Create the request
+$shipmentRequest = new AddShipments([$shipment]);
+
+// Send the request
+$response = $connector->send($shipmentRequest);
+
+// Convert the request to an array of Shipment ids
+$ids = $response->dtoOrFail();
 ```
+
+For more usage examples, have a look at the tests in the `tests/Feature` folder.
+
+## Be careful
+
+This is a dumb SDK, so this SDK doesn't check correctness of the data. You have to take into account that the MyParcel
+service is also lenient on data errors. You can easily create a label for a non-existent address. When you delete 
+non-existing shipments, MyParcel doesn't respond with an error. 
 
 ## Testing
 
@@ -47,5 +67,5 @@ be last in the argument list of the constructor.
 
 Because tests are performed against the production API, make sure that tests delete or hide all created shipments.
 
-When you are working in the test suite, you can display the send request and response by setting `$this->debug = true`
+When you are working in the test suite, you can display the sent request and response by setting `$this->debug = true`
 within the test.

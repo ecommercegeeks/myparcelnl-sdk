@@ -21,6 +21,7 @@ class Shipment implements Arrayable, CastsFromObject
         public ?int $account_id = null,
         public ?int $shop_id = null,
         public ?int $shipment_type = null,
+        public ?PickupLocation $pickup = null,
     )
     {
     }
