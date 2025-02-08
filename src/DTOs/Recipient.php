@@ -19,7 +19,7 @@ class Recipient implements Arrayable, CastsFromObject
         public string $street,
         public string $number,
         public string $postal_code,
-        public string $person,
+        public ?string $person = null,
         public ?string $region = null,
         public ?string $phone = null,
         public ?string $email = null
