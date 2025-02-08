@@ -39,7 +39,20 @@ For more usage examples, have a look at the tests in the `tests/Feature` folder.
 
 This is a dumb SDK, so this SDK doesn't check correctness of the data. You have to take into account that the MyParcel
 service is also lenient on data errors. You can easily create a label for a non-existent address. When you delete 
-non-existing shipments, MyParcel doesn't respond with an error. 
+non-existing shipments, MyParcel doesn't respond with an error.
+
+## Implemented requests
+
+| Request           | Endpoint                | dto()              | Description               |
+|-------------------|-------------------------|--------------------|---------------------------|
+| AddShipment       | POST   /shipments       |                    |                           |
+| GetShipments      | GET    /shipments       |                    |                           |
+| UpdateShipment    | PATCH  /shipments       |                    |                           |
+| DeleteShipment    | DELETE /shipments       |                    |                           |
+| GetLocations      | GET    /locations       | array of locations | Endpoint is limited to NL |
+| MatchLocations    | GET    /locations/match | -                  |                           |
+| GetShipmentLabels | GET    /shipment_labels |                    |                           |
+
 
 ## Testing
 
