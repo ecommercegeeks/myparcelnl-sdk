@@ -1,6 +1,7 @@
 <?php
 namespace EcommerceGeeks\MyparcelSdk\Tests\Feature;
 
+use EcommerceGeeks\MyparcelSdk\DTOs\SecondaryShipment;
 use EcommerceGeeks\MyparcelSdk\Requests\AddShipments;
 use EcommerceGeeks\MyparcelSdk\Requests\UpdateShipments;
 use EcommerceGeeks\MyparcelSdk\Tests\Factories\ShipmentFactory;
@@ -8,7 +9,15 @@ use EcommerceGeeks\MyparcelSdk\Requests\GetShipmentLabels;
 
 describe('Shipments', function () {
     test('shipment is created', function () {
-        $shipment = $this->send(new AddShipments([ShipmentFactory::create()]))->dtoOrFail()[0];
+        $extraAttributes = [
+            'secondary_shipments' => [new SecondaryShipment('secondary shipment test')],
+        ];
+
+        $shipmentData = ShipmentFactory::create($extraAttributes);
+        $request = new AddShipments([$shipmentData]);
+
+        $shipment = $this->send($request)->dtoOrFail()[0];
+
         $this->setShipmentId($shipment['id']);
         expect($shipment['id'])->toBeInt();
     });

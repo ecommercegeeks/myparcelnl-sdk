@@ -13,7 +13,9 @@
             "EcommerceGeeks\\MyparcelSdk\\Tests\\": "tests"
         }
     },
-
+    "scripts": {
+        "test": "pest"
+    },
     "authors": [
         {
             "name": "eCommerce Geeks"
