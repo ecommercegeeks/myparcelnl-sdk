@@ -9,7 +9,9 @@ use EcommerceGeeks\MyparcelSdk\Traits\AttributesToArray;
 
 class Shipment implements Arrayable, CastsFromObject
 {
-    use AttributesToArray;
+    use AttributesToArray {
+        toArray as originalToArray;
+    }
 
     public function __construct(
         public Recipient $recipient,
@@ -22,6 +24,8 @@ class Shipment implements Arrayable, CastsFromObject
         public ?int $shop_id = null,
         public ?int $shipment_type = null,
         public ?PickupLocation $pickup = null,
+        /** @var SecondaryShipment[]|null */
+        public ?array $secondary_shipments = null,
     )
     {
     }
@@ -41,4 +45,14 @@ class Shipment implements Arrayable, CastsFromObject
         );
     }
 
+    public function toArray(): array
+    {
+        $array = $this->originalToArray();
+
+        if($this->secondary_shipments) {
+            $array['secondary_shipments'] = array_map(fn(SecondaryShipment $shipment) => $shipment->serialize(), $this->secondary_shipments);
+        }
+
+        return $array;
+    }
 }
