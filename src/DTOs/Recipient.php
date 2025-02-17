@@ -22,7 +22,8 @@ class Recipient implements Arrayable, CastsFromObject
         public ?string $person = null,
         public ?string $region = null,
         public ?string $phone = null,
-        public ?string $email = null
+        public ?string $email = null,
+        public ?string $company = null,
     )
     {
     }
@@ -38,7 +39,8 @@ class Recipient implements Arrayable, CastsFromObject
             $object->person,
             $object->region ?? null,
             $object->phone ?? null,
-            $object->email ?? null
+            $object->email ?? null,
+            $object->company ?? null,
         );
     }
 }
