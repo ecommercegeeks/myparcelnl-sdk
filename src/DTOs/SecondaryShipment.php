@@ -2,17 +2,17 @@
 
 namespace EcommerceGeeks\MyparcelSdk\DTOs;
 
-use EcommerceGeeks\MyparcelSdk\Contracts\Arrayable;
-use EcommerceGeeks\MyparcelSdk\Traits\AttributesToArray;
-
-class SecondaryShipment implements Arrayable
+class SecondaryShipment
 {
-    use AttributesToArray;
-
     public function __construct(
         public ?string $reference_identifier = null,
         public ?int $id = null,
     )
     {
+    }
+
+    public function serialize(): object
+    {
+        return (object) array_filter(get_object_vars($this), fn($value) => $value !== null);
     }
 }

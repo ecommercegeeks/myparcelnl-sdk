@@ -10,7 +10,7 @@ use EcommerceGeeks\MyparcelSdk\Requests\GetShipmentLabels;
 describe('Shipments', function () {
     test('shipment is created', function () {
         $extraAttributes = [
-            'secondary_shipments' => [new SecondaryShipment('secondary shipment test')],
+            'secondary_shipments' => [new SecondaryShipment],
         ];
 
         $shipmentData = ShipmentFactory::create($extraAttributes);
