@@ -13,11 +13,6 @@ class TrackShipments extends MyparcelRequest
 
     public function __construct(
         protected array $ids,
-        protected ?int $page = null,
-        protected ?int $size = null,
-        protected ?string $sort = null,
-        protected ?SortOrder $order = null,
-        protected ?string $extra_info = null,
     )
     {
     }
