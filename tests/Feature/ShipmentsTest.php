@@ -2,7 +2,9 @@
 namespace EcommerceGeeks\MyparcelSdk\Tests\Feature;
 
 use EcommerceGeeks\MyparcelSdk\DTOs\SecondaryShipment;
+use EcommerceGeeks\MyparcelSdk\DTOs\TrackTrace;
 use EcommerceGeeks\MyparcelSdk\Requests\AddShipments;
+use EcommerceGeeks\MyparcelSdk\Requests\TrackShipments;
 use EcommerceGeeks\MyparcelSdk\Requests\UpdateShipments;
 use EcommerceGeeks\MyparcelSdk\Tests\Factories\ShipmentFactory;
 use EcommerceGeeks\MyparcelSdk\Requests\GetShipmentLabels;
@@ -22,7 +24,7 @@ describe('Shipments', function () {
         expect($shipment['id'])->toBeInt();
     });
     test('shipment can be retrieved', function () {
-
+        // TODO: implement test
     });
     test('shipment label is retrieved', function(){
         $request = new GetShipmentLabels([$this->getShipmentId()]);
@@ -32,6 +34,20 @@ describe('Shipments', function () {
         file_put_contents('label.pdf', $response->body());
         expect(mime_content_type('label.pdf'))->toBe('application/pdf');
         unlink('label.pdf');
+    });
+    test('shipment can be tracked', function () {
+        $request = new TrackShipments([$this->getShipmentId()]);
+        $response = $this->send($request);
+
+        /** @var TrackTrace $trackTrace */
+        $trackTrace = $response->dtoOrFail()[0];
+
+        expect($response->status())->toBe(200)
+            ->and($trackTrace->shipment_id)->toBe($this->getShipmentId())
+            ->and($trackTrace->code)->not->toBeNull()
+            ->and($trackTrace->description)->not->toBeNull()
+            ->and($trackTrace->time)->not->toBeNull()
+            ->and($trackTrace->link_tracktrace)->not->toBeNull();
     });
     test('shipment can be updated', function(){
         $request = new UpdateShipments([$this->getShipmentId()],['hidden'=>1]);
