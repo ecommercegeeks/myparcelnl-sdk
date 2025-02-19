@@ -3,6 +3,7 @@
 namespace EcommerceGeeks\MyparcelSdk\Requests;
 
 use EcommerceGeeks\MyparcelSdk\DTOs\Shipment;
+use EcommerceGeeks\MyparcelSdk\DTOs\ShipmentIdentifier;
 use Saloon\Enums\Method;
 use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
@@ -41,8 +42,12 @@ class AddShipments extends MyparcelRequest implements HasBody
         ];
     }
 
+    /** @return ShipmentIdentifier[] */
     public function createDtoFromResponse(Response $response): array
     {
-        return $response->json('data')['ids'];
+        $shipments = $response->json('data')['ids'];
+        return array_map(function(array $shipment) {
+            return ShipmentIdentifier::fromObject((object) $shipment);
+        }, $shipments);
     }
 }
