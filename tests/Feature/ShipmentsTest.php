@@ -2,6 +2,7 @@
 namespace EcommerceGeeks\MyparcelSdk\Tests\Feature;
 
 use EcommerceGeeks\MyparcelSdk\DTOs\SecondaryShipment;
+use EcommerceGeeks\MyparcelSdk\DTOs\ShipmentIdentifier;
 use EcommerceGeeks\MyparcelSdk\DTOs\TrackTrace;
 use EcommerceGeeks\MyparcelSdk\Requests\AddShipments;
 use EcommerceGeeks\MyparcelSdk\Requests\TrackShipments;
@@ -18,10 +19,13 @@ describe('Shipments', function () {
         $shipmentData = ShipmentFactory::create($extraAttributes);
         $request = new AddShipments([$shipmentData]);
 
-        $shipment = $this->send($request)->dtoOrFail()[0];
+        /** @var ShipmentIdentifier[] $shipments */
+        $shipments = $this->send($request)->dtoOrFail();
 
-        $this->setShipmentId($shipment['id']);
-        expect($shipment['id'])->toBeInt();
+        expect($shipments)->toBeArray()->toHaveCount(1)
+            ->and($shipments[0])->toBeInstanceOf(ShipmentIdentifier::class);
+
+        $this->setShipmentId($shipments[0]->id);
     });
     test('shipment can be retrieved', function () {
         // TODO: implement test
@@ -43,6 +47,7 @@ describe('Shipments', function () {
         $trackTrace = $response->dtoOrFail()[0];
 
         expect($response->status())->toBe(200)
+            ->and($trackTrace)->toBeInstanceOf(TrackTrace::class)
             ->and($trackTrace->shipment_id)->toBe($this->getShipmentId())
             ->and($trackTrace->code)->not->toBeNull()
             ->and($trackTrace->description)->not->toBeNull()
