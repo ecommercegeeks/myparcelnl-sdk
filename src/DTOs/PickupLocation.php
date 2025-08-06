@@ -15,6 +15,7 @@ class PickupLocation implements Arrayable
         public ?string $city = null,
         public ?string $number = null,
         public ?string $location_name = null,
-        public ?string $location_code = null
+        public ?string $location_code = null,
+        public ?string $retail_network_id = null,
     ){}
 }
