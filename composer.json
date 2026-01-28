@@ -26,7 +26,7 @@
     },
     "require-dev": {
         "ext-fileinfo": "*",
-        "pestphp/pest": "^3.5",
+        "pestphp/pest": "^4.0",
         "symfony/dotenv": "^7.2",
         "symfony/var-dumper": "^7.2",
         "fakerphp/faker": "^1.24"
