@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "saloonphp/saloon": "^3.0"
+        "saloonphp/saloon": "^3.0 || ^4.0"
     },
     "require-dev": {
         "ext-fileinfo": "*",
